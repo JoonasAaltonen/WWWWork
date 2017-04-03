@@ -9,14 +9,24 @@ app.set("view engine", ".hbs");
 
 app.set("port", process.env.PORT || 3000);
 
-app.get("/koti", function(req, res)
+app.get("", function(req, res)
 {
     res.render("home.hbs");
 });
 
-app.get("/tietoja", function(req, res)
+app.get("/admin", function(req, res)
 {
-    res.render("tietoja.hbs");
+    res.render("adminPanel.hbs");
+});
+
+app.get("/login", function(req, res)
+{
+    res.render("login.hbs");
+});
+
+app.get("/thread", function(req, res)
+{
+    res.render("thread.hbs");
 });
 
 app.use(function(req, res)
