@@ -12,7 +12,8 @@
   "repository" :
   { "type" : "git",
   "url" : "https://github.com/JoonasAaltonen/WWWWork.git"
-  }
+  },
+
   "author": "Joonas",
   "contributors": [],
   "dependencies": {

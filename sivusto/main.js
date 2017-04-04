@@ -5,28 +5,28 @@ var app = express();
 var exphbs = require("express-handlebars");
 
 app.engine(".hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
-app.set("view engine", ".hbs");
+app.set("view engine",".hbs");
 
 app.set("port", process.env.PORT || 3000);
 
 app.get("", function(req, res)
 {
-    res.render("home.hbs");
+    res.render("home");
 });
 
 app.get("/admin", function(req, res)
 {
-    res.render("adminPanel.hbs");
+    res.render("adminPanel");
 });
 
 app.get("/login", function(req, res)
 {
-    res.render("login.hbs");
+    res.render("login");
 });
 
 app.get("/thread", function(req, res)
 {
-    res.render("thread.hbs");
+    res.render("thread");
 });
 
 app.use(function(req, res)
