@@ -9,7 +9,7 @@ app.set("view engine",".hbs");
 
 app.set("port", process.env.PORT || 3000);
 
-app.get("", function(req, res)
+app.get("/", function(req, res)
 {
     res.render("home");
 });
