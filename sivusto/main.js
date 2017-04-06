@@ -7,6 +7,8 @@ var exphbs = require("express-handlebars");
 app.engine(".hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine",".hbs");
 
+var helpers = require('handlebars-helpers');
+
 app.set("port", process.env.PORT || 3000);
 
 app.get("/", function(req, res)
@@ -46,6 +48,6 @@ app.use(function(err, req, res, next)
 
 app.listen(app.get("port"), function()
 {
-   console.log("Web-palvelin käynnissä http://localhost:" + app.get("port") + 
+   console.log("Keskustelulauta käynnissä http://localhost:" + app.get("port") + 
            " sammuta ctrl+c"); 
 });
