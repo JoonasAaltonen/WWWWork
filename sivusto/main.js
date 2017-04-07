@@ -31,6 +31,11 @@ app.get("/thread", function(req, res)
     res.render("thread");
 });
 
+app.get("/about", function(req, res)
+{
+    res.render("about");
+});
+
 app.use(function(req, res)
 {
     res.type("text/html");
