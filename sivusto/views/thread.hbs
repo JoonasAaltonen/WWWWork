@@ -1,4 +1,4 @@
-<style>
+<style>     <!-- Styles for thread site -->
     .navbar {
       margin-bottom: 0;
       border-radius: 0;
@@ -20,10 +20,25 @@
 
     textarea {
     resize: vertical;
-
+    align: center;
     }
+    
+    .commentSep {   <!-- Viiva kommenttien välissä, -->
+        background-color: red;  <!-- HUOM! color ei toimi -->
+        border-color: red;
+        background: red;
+        }
+    
+    #comments
+    {
+        height: 75%;
+        overflow: scroll;
+    }
+
+
+    
 </style>
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse">     <!-- navigation bar -->
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -45,9 +60,10 @@
   </div>
 </nav>
 
+<!-- ad blocks on left side -->
 <div class="container-fluid text-center">    
   <div class="row content">
-    <div class="col-sm-2 sidenav">
+    <div class="col-sm-2 sidenav" >
       <div class="well">
         <p>ADS</p>
       </div>
@@ -55,22 +71,16 @@
         <p>ADS</p>
       </div>
     </div>
-  <!--  <div class="col-sm-2 sidenav">
-      <div class="well">
-        <p>ADS</p>
-      </div>
-      <div class="well">
-        <p>ADS</p>
-      </div>
-    </div> -->
     
+<!-- comments section -->
     <div class="col-sm-8 text-left" id="comments"> 
       <h1>Welcome</h1>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       <hr>
       </div>
-        <div class="col-sm-8 text-left">    
+        <div class="col-sm-8 text-left">  
             <label for="comment">Kommentit:</label>
+            
             <textarea class="form-control" rows="5" id="commentArea" placeholder="Kirjoita tänne kommenttisi"></textarea>
             <input type="button" id="commentButton" value="Kommentoi"></input>
         </div>
@@ -93,7 +103,20 @@ button.addEventListener("click", CreateText);
 function CreateText()
 {
     var textNode = document.createTextNode(document.getElementById("commentArea").value);
-    var nodeElement = document.createElement("p");
-    nodeElement.appendChild(textNode);
-    document.getElementById("comments").appendChild(nodeElement);
+    var textElement = document.createElement("p");
+    textElement.appendChild(textNode);
+    var currentTime = document.lastModified;
+    var timeStamp = document.createElement("p");
+    
+    console.log(currentTime);
+    
+    var commentSeparator = document.createElement("hr")
+    commentSeparator.setAttribute("class", "commentSep");
+    
+    var commentElement = document.getElementById("comments");
+    commentElement.appendChild(timeStamp);
+    timeStamp.innerHTML = currentTime;
+    commentElement.appendChild(textElement);
+    commentElement.appendChild(commentSeparator);
+    document.getElementById("commentArea").value = "";
 }</script>

@@ -1,0 +1,12 @@
+
+var button = document.getElementById("commentButton"); 
+button.addEventListener("click", CreateText);
+
+function CreateText()
+{
+    var textNode = document.createTextNode(document.getElementById("commentArea").value);
+    var nodeElement = document.createElement("p");
+    nodeElement.appendChild(textNode);
+    document.getElementById("comments").appendChild(nodeElement);
+    document.getElementById("commentArea").value = "";
+}
