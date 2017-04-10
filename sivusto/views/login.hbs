@@ -1,13 +1,55 @@
 <h2>Admin login</h2>
-        <form  action="admin"> 
+        <form  action="admin" onsubmit="return submitFunc()">
 
         <p><label>Käyttäjänimi:
-        <input id="user" type="text" size="30" />
+        <input id="user_input" type="text" size="30" />
         </label></p>
         <p><label >Salasana:
-        <input id="password" type="password" size="30" />
+        <input id="password_input" type="password" size="30" />
         </label></p>
         <input type="submit" value="Login"></input>
         </form>
-        
+
         <a href="/"><p>takaisin kotisivulle</p></a>
+
+
+<script>
+
+
+var userCheck = document.getElementById('user_input').value;
+var passwordCheck = document.getElementById('password_input').value;
+
+
+submitFunc(){
+
+  if (( userCheck === '') || (passwordCheck === '')) {
+
+      return false;
+
+  }
+
+  else {
+      return true;
+  }
+
+}
+
+
+function(){
+
+User.find({ username: userCheck }, function(err, user) {
+  if (err)
+  {
+  throw err;
+    console.log(err);
+  }
+});
+
+User.find({ password: userCheck }, function(err, user) {
+  if (err) {
+    throw err;
+    console.log(err);
+  }
+});
+}
+</script>
