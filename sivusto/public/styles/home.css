@@ -9,10 +9,26 @@ and open the template in the editor.
 */
 
 body {
-    background-color: orchid;
+    background-color: black;
 }
+
 
 h1 {
     color: coral;
+    text-align: center;
+}
+
+h2 {
+    color: #AAAAAA;
+    text-align: center;
+}
+
+p {
+    color:white;
+    text-align: center;
+}
+
+a {
+    align-self: center;
     text-align: center;
 }

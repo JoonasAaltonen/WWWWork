@@ -1,4 +1,11 @@
+// -----    "INITIAL VARIABLES"     -----
+
+var path = require("path");
+
 var express = require("express");
+
+var fs = require("fs");     
+// File system, käytetään staattisten tiedostojen lukemiseen
 
 var app = express();
 
@@ -14,10 +21,13 @@ var opts = {
     }
 };
 
+app.use(express.static(__dirname + "/public"));     // Tällä pätkällä saa kaikki staattiset tiedostot
+
+// -----    MONGODB JUTUT    -----
 
 switch (app.get('env')) {
   case 'development':
-      mongoose.connect('mongodb://USER:PASSU@ds155150.mlab.com:55150/lomasivu', opts);
+      mongoose.connect("mongodb://Joonas:Joonas@ds155150.mlab.com:55150/joonasaaltonen", opts);
       break;
 
   default:
@@ -37,8 +47,8 @@ User.find(function(err,users){
 
 new User({
 
-     username: 'admin',
-     password: 'admin'
+     username: 'Moderator', // Ei lisää toista käyttäjää vaikka eri tiedot
+     password: 'Moderator'
 
    }).save();
 
@@ -54,6 +64,8 @@ User.find({}, function(err, users) {
   console.log(users);
 });
 
+// -----    MONGODB JUTUT LOPPU     -----
+
 
 app.engine(".hbs", exphbs({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine",".hbs");
@@ -63,9 +75,39 @@ var helpers = require('handlebars-helpers');
 
 app.set("port", process.env.PORT || 3000);
 
+
+ // -----    STAATTISTEN TIEDOSTOJEN LUKU    -----
+
+function serveStaticFile(res, path, contentType, responseCode)
+{
+    if (!responseCode)
+    {
+        responseCode = 200;
+    }
+    fs.readFile(__dirname + path, function(err, data)
+        {
+            if (err)
+            {
+                res.writeHead(500, { "Content-Type": "text/plain" });
+                res.end("Error 500 - Virhe palvelinpuolella");
+            }
+            else
+            {
+                res.writeHead(responseCode, {"Content-Type": contentType });
+                res.end(data);
+            } 
+    });
+}
+
+// -----    STAATTISET TIEDOSTOT LOPPU  -----
+
+// -----    ROUTING JUTUT    -----
+
 app.get("/", function(req, res)
 {
     res.render("home");
+   // serveStaticFile(res, "/public/javascript.jpg", "image/jpeg");
+   // Korvaa home sivun kuvalla
 });
 
 app.get("/admin", function(req, res)
@@ -102,7 +144,7 @@ app.use(function(req, res)
 {
     res.type("text/html");
     res.status(404);
-    res.send("<h1>404 - Resurssia ei löytynyt</h1>");
+    res.send("<h1>Error 404 - Resurssia ei löytynyt</h1>");
 });
 
 app.use(function(err, req, res, next)
@@ -112,6 +154,9 @@ app.use(function(err, req, res, next)
     res.send("<h1>Error 500 - Virhe palvelinpuolella</h1>");
     console.log(err.stack);
 });
+
+// -----     ROUTING JUTUT LOPPU     -----
+
 
 app.listen(app.get("port"), function()
 {

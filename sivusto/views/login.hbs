@@ -1,55 +1,83 @@
 <h2>Admin login</h2>
-        <form  action="admin" onsubmit="return submitFunc()">
+<form  action="admin" onsubmit="return submitFunc()">
 
-        <p><label>Käyttäjänimi:
-        <input id="user_input" type="text" size="30" />
+    <p><label>Käyttäjänimi:
+            <input id="user_input" type="text" size="30" />
         </label></p>
-        <p><label >Salasana:
-        <input id="password_input" type="password" size="30" />
+    <p><label >Salasana:
+            <input id="password_input" type="password" size="30" />
         </label></p>
-        <input type="submit" value="Login"></input>
-        </form>
+    <input type="submit" value="Login"></input>
+</form>
 
-        <a href="/"><p>takaisin kotisivulle</p></a>
+<a href="/"><p>takaisin kotisivulle</p></a>
 
-
+<script type="text/javascript" src='../models/user.js'></script>
 <script>
+    function submitFunc()
+    {
+        var userCheck = document.getElementById('user_input').value;
+        var passwordCheck = document.getElementById('password_input').value;
+        window.console.log("username: " + userCheck + ", password: " + passwordCheck);
+    
+        if ((userCheck == '') || (passwordCheck == ''))
+        {
+            window.console.log("User or password empty");
+            return false;
+        }
+
+        else
+        {
+            var userFind = findUserFromDb();
+            if (userfind == true)
+            {
+                return true;
+            }
+            window.console.log("User or password wrong");
+            return false;
+        }
+    }
 
 
-var userCheck = document.getElementById('user_input').value;
-var passwordCheck = document.getElementById('password_input').value;
+    function findUserFromDb()
+    {
+        window.console.log("Trying to find user from database...");
+        var userOk = false;
+        var passwordOk = false;
+        
+        User.find({username: userCheck}, function (err, user)
+        {
+            if(!user)
+                {
+                    console.log("Jotain siistii, tuleeko error?");
+                    return false;
+                }
+            if (err)
+            {
+                console.log(err);
+                return false;
+            }
+            else userOk = true;
+        });
 
-
-submitFunc(){
-
-  if (( userCheck === '') || (passwordCheck === '')) {
-
-      return false;
-
-  }
-
-  else {
-      return true;
-  }
-
-}
-
-
-function(){
-
-User.find({ username: userCheck }, function(err, user) {
-  if (err)
-  {
-  throw err;
-    console.log(err);
-  }
-});
-
-User.find({ password: userCheck }, function(err, user) {
-  if (err) {
-    throw err;
-    console.log(err);
-  }
-});
-}
+        User.find({password: userCheck}, function (err, user)
+        {
+            if(!user)
+            {
+                console.log("Jotain siistii, tuleeko error?");
+                return false;
+            }
+            if (err)
+            {
+                console.log(err);
+                return false;
+            }
+            else passwordOk = true;
+        });
+        
+        if (userOk === true && passwordOk === true)
+        {
+            return true;
+        }
+    }
 </script>
