@@ -9,21 +9,25 @@ button.addEventListener("click", CreateText);
 
 function CreateText()
 {
-    var textNode = document.createTextNode(document.getElementById("commentArea").value);
-    var textElement = document.createElement("p");
-    textElement.appendChild(textNode);
-    var currentTime = document.lastModified;
-    var timeStamp = document.createElement("p");
+    if (document.getElementById("commentArea").value != "")
+    {
+        var textNode = document.createTextNode(document.getElementById("commentArea").value);
+        var textElement = document.createElement("p");
+        textElement.appendChild(textNode);
+        var currentTime = document.lastModified;
+        var timeStamp = document.createElement("p");
+
+        console.log(currentTime);
+
+        var commentSeparator = document.createElement("hr");
+        commentSeparator.setAttribute("class", "commentSep");
+
+        var commentElement = document.getElementById("comments");
+        commentElement.appendChild(timeStamp);
+        timeStamp.innerHTML = currentTime;
+        commentElement.appendChild(textElement);
+        commentElement.appendChild(commentSeparator);
+        document.getElementById("commentArea").value = "";
+    }
     
-    console.log(currentTime);
-    
-    var commentSeparator = document.createElement("hr");
-    commentSeparator.setAttribute("class", "commentSep");
-    
-    var commentElement = document.getElementById("comments");
-    commentElement.appendChild(timeStamp);
-    timeStamp.innerHTML = currentTime;
-    commentElement.appendChild(textElement);
-    commentElement.appendChild(commentSeparator);
-    document.getElementById("commentArea").value = "";
 }
