@@ -38,4 +38,7 @@ a {
     background-color: black;
     background-image: url("../images/adgif2.gif");
     height: 300px;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
 }
