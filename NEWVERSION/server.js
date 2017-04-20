@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser= require('body-parser')
 const app = express();
 
-
+app.use(express.static(__dirname + "/public"));
 const MongoClient = require('mongodb').MongoClient
 
 var db
@@ -23,12 +23,27 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('/',function(req,res){
 
-  db.collection('viestit').find().toArray((err, result) => {
-    if (err) return console.log(err)
-    res.render('index.ejs', {viestit: result})
+    res.render('startpage.ejs' )
+  })
+  
+app.get('/login',function(req,res){
+
+    res.render('login.ejs' )
+  })
+  
+app.get('/admin',function(req,res){
+
+    res.render('adminpanel.ejs' )
   })
 
-});
+app.get('/thread',function(req,res){
+
+  db.collection('viestit').find().toArray((err, result) => {
+    if (err) return console.log(err)
+    res.render('thread.ejs', {viestit: result})
+  })
+
+})
 
 app.post('/viestit', (req, res) => {
 
