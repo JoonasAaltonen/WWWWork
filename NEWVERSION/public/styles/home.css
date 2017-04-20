@@ -32,3 +32,10 @@ a {
     align-self: center;
     text-align: center;
 }
+
+#jalka {
+    color: black;
+    background-color: black;
+    background-image: url("../images/adgif2.gif");
+    height: 300px;
+}
