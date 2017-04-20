@@ -11,9 +11,14 @@ var app = express();
 
 var exphbs = require("express-handlebars");
 
+app.use(express.static(__dirname + "/public"));     // Tällä pätkällä saa kaikki staattiset tiedostot
+
+// -----    MONGODB JUTUT    -----
+
 var mongoose = require('mongoose');
 
 var User = require('./models/user.js');
+var Comment = require('./models/comment.js');
 
 var opts = {
     server: {
@@ -21,17 +26,13 @@ var opts = {
     }
 };
 
-app.use(express.static(__dirname + "/public"));     // Tällä pätkällä saa kaikki staattiset tiedostot
-
-// -----    MONGODB JUTUT    -----
-
 switch (app.get('env')) {
   case 'development':
       mongoose.connect("mongodb://Joonas:Joonas@ds155150.mlab.com:55150/joonasaaltonen", opts);
       break;
 
   default:
-    throw new Error('Unkwon execution environment:'+app.get('env'));
+    throw new Error('Unknown execution environment:' + app.get('env'));
 
 }
 
@@ -41,19 +42,37 @@ User.find(function(err,users){
       console.err(err);
     }
 
-    if(users.length){
-      return;
-    }
+    if(users.length){     // Kun halutaan lisätä käyttäjiä, tämä pois
+      return;             // Estää spämmin ohjelman testaamisen aikana
+    }                     // Ei lisää enempää käyttäjiä jos on jo yksi
 
 new User({
 
-     username: 'Moderator', // Ei lisää toista käyttäjää vaikka eri tiedot
+     username: 'Moderator', 
      password: 'Moderator'
 
    }).save();
-
-
 });
+
+Comment.find((function(err, comments)   // Uuden kommentin lisäys tietokantaan onnistui
+{
+    if (err)
+    {
+        console.err(err);
+    }
+    if(comments.length){ 
+      return;             
+    }                     
+
+    new Comment(
+        {
+        date: new Date(),       // En tiedä toimiiko
+        message: "Spurdo spärde"
+            
+    }).save();
+}));
+
+
 
 
 // get all the users
