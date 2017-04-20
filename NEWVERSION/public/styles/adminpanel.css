@@ -1,10 +1,14 @@
-#jalka {
-    color: black;
-    background-color: black;
-    background-image: url("../images/adgif2.gif");
-    height: 300px;
-    width: 100%;
-    bottom: 0px;
+@media only screen and (min-height: 650px)
+{
+    #jalka {
+        color: black;
+        background-color: black;
+        background-image: url("../images/adgif2.gif");
+        height: 300px;
+        width: 100%;
+        bottom: 0px;
+        position: absolute;
+    }
 }
 
 #myDIV {

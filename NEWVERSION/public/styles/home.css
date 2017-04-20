@@ -32,13 +32,15 @@ a {
     align-self: center;
     text-align: center;
 }
-
-#jalka {
-    color: black;
-    background-color: black;
-    background-image: url("../images/adgif2.gif");
-    height: 300px;
-    width: 100%;
-    position: absolute;
-    bottom: 0px;
+@media only screen and (min-height: 500px)
+{
+    #jalka {
+        color: black;
+        background-color: black;
+        background-image: url("../images/adgif2.gif");
+        height: 300px;
+        width: 100%;
+        position: absolute;
+        bottom: 0px;
+    }
 }
