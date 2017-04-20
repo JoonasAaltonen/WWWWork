@@ -4,17 +4,18 @@
     background-image: url("../images/adgif2.gif");
     height: 300px;
     width: 100%;
-    position: absolute;
     bottom: 0px;
 }
 
 #myDIV {
     width: cover;
     height: cover;
-    background: red;
+    background: cyan;
     -webkit-animation: mymove 5s infinite; /* Chrome, Safari, Opera */
     animation: mymove 5s infinite;
     text-align: center;
+
+
 }
 
 /* Chrome, Safari, Opera */
