@@ -25,12 +25,12 @@ app.get('/',function(req,res){
 
     res.render('startpage.ejs' )
   })
-  
+
 app.get('/login',function(req,res){
 
     res.render('login.ejs' )
   })
-  
+
 app.get('/admin',function(req,res){
 
     res.render('adminpanel.ejs' )
@@ -45,12 +45,23 @@ app.get('/thread',function(req,res){
 
 })
 
+
 app.post('/viestit', (req, res) => {
 
   db.collection('viestit').save(req.body, (err, result) => {
    if (err) return console.log(err)
    console.log('Tallennettu tietokantaan')
    res.redirect('/thread')
+ })
+
+})
+
+
+app.post('/addnewuser', (req, res) => {
+  db.collection('adminit').save(req.body, (err, result) => {
+   if (err) return console.log(err)
+   console.log('Tallennettu tietokantaan')
+   res.redirect('/admin')
  })
 
 })

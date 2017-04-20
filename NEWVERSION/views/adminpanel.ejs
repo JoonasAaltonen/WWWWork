@@ -11,24 +11,23 @@
         <a href="/thread"><button type="button" class="btn btn-default btn-sm">
         <span class="glyphicon glyphicon-wrench"></span>
         </button></a>
-        
+
         <h2>Lisää moderaattoreita</h2>
-        <form> 
+        <form action="/addnewuser" method="POST">
         <p><label>Käyttäjänimi:
-        <input id="user" type="text" size="30" />
+        <input type="text" placeholder="nimi" name="user">
         </label></p>
         <p><label >Salasana:
-        <input id="password" type="password" size="30" />
+        <input type="password" placeholder="password" name="password">
         </label></p>
         <input type="submit" value="Add user"></input>
         </form>
-        
+
         <a href="/"><p>Takaisin kotisivulle</p></a>
-		
+
 	<footer class="container-fluid text-center" id="jalka">
         </footer>
         <script src="./scripts/virusclicks.js"></script>
 
     </body>
 </html>
-

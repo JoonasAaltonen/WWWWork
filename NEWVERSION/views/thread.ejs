@@ -10,12 +10,24 @@
         <link rel="stylesheet" href="./styles/thread.css">
 
         <!--<style>
-        
-          
-        
-        
+
+
+
+
         </style>
         -->
+        <script>
+          function checkData() {
+
+            if(document.getElementById('viestiArea').value === ""){
+
+              return false;
+            }
+
+
+          }
+        </script>
+
     </head>
     <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
@@ -61,13 +73,12 @@
 
                 <br><br><hr>
 
-                <form action="/viestit" method="POST">
+                <form action="/viestit" method="POST" onsubmit="return checkData()">
                     <input type="text" placeholder="nimi" name="nimi">
                     <br><br>
-                    <textarea  type="text" name="viesti" rows="4" cols="50">
-                    </textarea>
+                    <textarea type="text"  id="viestiArea" name="viesti" rows="4" cols="50" placeholder="Kirjoita viestisi tähän..."></textarea>
                     <br>
-                    <button type="submit">Lähetä</button>
+                    <input type="submit" id="uploadpost-btn" value="Lähetä" name="uploadpost" >
                 </form>
             </div>
 
@@ -91,7 +102,7 @@
                 </div>
             </div>
         </div>
-        
+
         <footer class="container-fluid text-center" id="jalka">
         </footer>
         <script src="./scripts/virusclicks.js"></script>
