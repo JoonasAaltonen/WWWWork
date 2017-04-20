@@ -50,7 +50,7 @@ app.post('/viestit', (req, res) => {
   db.collection('viestit').save(req.body, (err, result) => {
    if (err) return console.log(err)
    console.log('Tallennettu tietokantaan')
-   res.redirect('/')
+   res.redirect('/thread')
  })
 
 })
